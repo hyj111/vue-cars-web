@@ -1,0 +1,95 @@
+@import "./normalize.scss";
+@import "./sassConfig.scss";
+@import"./ui.scss";
+
+i[class^=icon] { //获取类名开头为icon的i标签
+    display: inline-block;
+  
+    border-radius: 100px;
+    background-color: $color-main;
+    background-repeat: no-repeat;
+} 
+.icon-w-44 {  width: 44px; height: 44px;}
+.color-main {
+    color: $color-main;
+}
+//  text-align
+.text-center {text-align: center;}
+.text-left {text-align: left;}
+.text-right {text-align: right;}
+.icon-help {
+    background-image: url(~@/assets/images/icon/icon-help.png);
+}
+.icon-search {
+    background-image: url(~@/assets/images/icon/icon-search.png);
+}
+.icon-location {
+    background-image: url(~@/assets/images/icon/icon-location.png);
+}
+.icon-user {
+    background-image: url(~@/assets/images/icon/icon-user.png);
+}
+
+.icon-router-link-1 {
+    background-image: url(~@/assets/images/icon/icon-router-link-001.png);
+}
+.icon-router-link-2 {
+    background-image: url(~@/assets/images/icon/icon-router-link-002.png);
+}
+.icon-router-link-3 {
+    background-image: url(~@/assets/images/icon/icon-router-link-003.png);
+}
+.icon-router-link-4 {
+    background-image: url(~@/assets/images/icon/icon-router-link-004.png);
+}
+.icon-router-link-5 {
+    background-image: url(~@/assets/images/icon/icon-router-link-005.png);
+}
+
+// 公用
+.select-car-btn {
+    display:block;
+    margin-right: 17px;
+    width: 240px;
+    height: 84px;
+    font-size: 26px;
+    font-weight: 300;
+    border-radius: 100px;
+    line-height: 84px;
+    text-align: center;
+    color: #fff;
+    background-color: black;
+  }
+
+  .user-container {
+    padding: 0 30px;
+}
+  .group-links {
+    a { 
+        position: relative;
+        margin:0 -30px;
+        padding: 0 30px;
+        display: block;
+        color: rgba(255,255,255,.4);
+        line-height: 64px;
+        border-bottom:1px solid rgba(255,255,255,.1);
+        font-size: 15px;
+    }
+    .icon {
+        width: 30px;
+        height: 30px;
+        margin: 0 16px -10px 0;
+    }
+    .arrow:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 30px;
+        width: 10px;
+        height: 10px;
+        border-top: 1px solid rgba(255,255,255,.5);
+        border-right: 1px solid rgba(255,255,255,.5);
+        transform: rotate(45deg) translateY(-50%);
+        opacity: 1;
+    }
+  }
