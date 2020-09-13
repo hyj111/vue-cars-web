@@ -1,5 +1,7 @@
 <template>
   <div>
+    
+    <Login/>
     <!-- 地图 -->
     <amap />
     <!-- car data渲染 -->
@@ -12,6 +14,7 @@
         <router-view />
       </div>
     </transition>
+    
   </div>
 </template>
 
@@ -19,12 +22,14 @@
 import amap from "../amap/amap";
 import cars from "../cars/cars";
 import NavBar from "../../components/navbar/NavBar";
+import Login from "./login"
 export default {
   name: "Index",
   components: {
     amap,
     cars,
     NavBar,
+    Login
   },
   data() {
     return {};
