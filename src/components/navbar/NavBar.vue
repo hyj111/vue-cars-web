@@ -4,7 +4,7 @@
        <li><i class="icon icon-w-44  icon-help"></i></li>
        <li><i class="icon icon-w-44 icon-search"></i></li>
        <li><a href="javascript:void();" class="select-car-btn">选择车辆</a></li>
-       <li><i class="icon icon-w-44 icon-location"></i></li>
+       <li><i class="icon icon-w-44 icon-location" @click="selfLocation"></i></li>
        <li><i class="icon icon-w-44 icon-user" @click="toUser"></i></li>
      </ul>
   </div>
@@ -16,6 +16,10 @@ export default {
     methods: {
       toUser() {
         this.$router.push({name:"User"}).catch(err => err)
+      },
+      // 获取当前位置
+      selfLocation(){
+        this.$store.commit("location/SELF_LOCATION")
       }
     },
 }

@@ -1,9 +1,8 @@
 <template>
   <div>
-    
-    <Login/>
+    <Login />
     <!-- 地图 -->
-    <amap />
+    <amap @callbackComponent="callbackComponent" ref="map" />
     <!-- car data渲染 -->
     <!-- 导航 -->
     <nav-bar />
@@ -22,22 +21,24 @@
 import amap from "../amap/amap";
 import cars from "../cars/cars";
 import NavBar from "../../components/navbar/NavBar";
-import Login from "./login"
+import Login from "./login";
+import { Parking } from "@/api/parking";
 export default {
   name: "Index",
   components: {
     amap,
     cars,
     NavBar,
-    Login
+    Login,
   },
   data() {
-    return {};
+    return {
+    
+    };
   },
   mounted() {
     // 点击空白处关闭会员页面
     document.addEventListener("mouseup", (e) => {
-      console.log(e.target);
       const userCon = document.querySelector("#children-view");
       // contains()，js原生方法，用于判断DOM元素的包含关系；判断children-view是否包含点击的目标，包含的话就返回true再取反则不会执行路由跳转
       if (userCon && !userCon.contains(e.target)) {
@@ -51,6 +52,41 @@ export default {
       const router = this.$route;
       return router.name === "Index" ? false : true;
     },
+  },
+  methods: {
+    callbackComponent(params) {
+      params.function && this[params.function](params);
+    },
+    loadMap() {
+      this.getParking();
+    },
+    // 获取停车场信息
+    getParking() {
+      Parking().then((res) => {
+        const data = res.data.data
+        data.forEach(item=>{
+          item.position = item.lnglat.split(',')
+          item.content = "<img src='"+require('@/assets/images/parking_location_img.png')+"'/>"
+          item.offset = [-35,-60]
+          item.offsetText=[-35,-55]
+          item.text = `<div style="width:70px; height:60px;line-height:55px; font-size:20px; color:#fff; text-align:center;">${item.carsNumber}</div>`
+          item.events = {
+            click:(e)=>{this.walking(e)}
+          }
+        })
+        // 调地图方法   
+        this.$refs.map.parkingData(data)
+      });
+    },
+    walking(e){    
+      const data = e.target.getExtData();
+      this.$refs.map.saveData({
+        key:"parkingDatas",
+        value:data
+      })
+      this.$refs.map.handlerWalk(data)
+      
+    }
   },
 };
 </script>
