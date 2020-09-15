@@ -3,20 +3,20 @@
     <section class="cars-item">
       <header>
         <h4 class="cars-logo">
-          <img src="../../assets/images/cars-logo.png" alt="Mustang 2019款式" />
-          <span class="name">Mustang 2019款式</span>
+          <img :src="data.imgUrl" :alt="data.carsMode" />
+          <span class="name">{{data.carsNumber}}</span>
         </h4>
         <p class="cars-attr">新能源汽车 5座</p>
       </header>
       <div class="cars-content">
         <div class="info">
-          <h4 class="cars-number">粤 B745NB</h4>
+          <h4 class="cars-number">{{data.carsMode}}</h4>
           <div>
-            <ul class="cars-electric">
-              <li class="active"></li>
-              <li class="active"></li>
-              <li class="active"></li>
-              <li class="active"></li>
+            <ul class="cars-electric" :class="data.oil | electricNumber">
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
               <li></li>
               <li></li>
               <li></li>
@@ -31,16 +31,16 @@
             </p>
           </div>
         </div>
-        <img src="../../assets/images/pic001.jpg" alt />
+        <img src="~@/assets/images/pic001.jpg" alt />
       </div>
       <footer>
         <a href="javascript: void(0)" class="parking-link">
-          某某停车场
+          {{data.parkingName}}
           <span></span>
         </a>
       </footer>
     </section>
-    <section class="cars-item cars-detail" :style="'height:'+height">
+    <!-- <section class="cars-item cars-detail" :style="'height:'+height">
       <div class="scroll">
         <h4 class="column">
           某某停车场
@@ -48,12 +48,12 @@
         </h4>
         <header>
           <h4 class="cars-logo">
-            <img src="../../assets/images/cars-logo.png" alt="Mustang 2019款式" />
+            <img src="~@/assets/images/cars-logo.png" alt="Mustang 2019款式" />
             <span class="name">Mustang 2019款式</span>
           </h4>
           <p class="cars-attr">新能源汽车 5座</p>
         </header>
-        <img src="../../assets/images/pic001.jpg" alt width="100%" />
+        <img src="~@/assets/images/pic001.jpg" alt width="100%" />
         <div class="cars-center">
           <h4 class="cars-number pull-left">粤 B745NB</h4>
           <p class="distance pull-right">
@@ -84,13 +84,20 @@
       <div>
         <li><a href="javascript:void();" class="select-car-btn">预约用车</a></li>
       </div>
-    </section>
+    </section> -->
   </div>
 </template>
 
 <script>
 export default {
   name: "CarsList",
+  filters:{
+    electricNumber(val){
+      const number = Math.round(val/10)
+      return `active-li-${number}`
+      
+    }
+  },
   data() {
     return {
       priceList: [
@@ -112,11 +119,15 @@ export default {
       type: String,
       default: "257px",
     },
+    // 接收车辆信息
+    data: {
+      type:Object,
+      default:()=>({})
+    }
   },
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scope>
 @import "./CartList.scss"
-
 </style>

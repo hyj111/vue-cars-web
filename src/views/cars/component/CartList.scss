@@ -28,8 +28,11 @@
   .cars-attr {
     text-align: right;
     line-height: 34px;
-  
+    
     opacity: 0.5;
+  }
+  .cars-number {
+    font-size: 20px;
   }
   .cars-content {
     margin: 11px 0 7px;
@@ -48,22 +51,23 @@
       transform: translateY(-50%);
     }
     .cars-electric {
-      li {
-        width: 7px;
-        height: 24px;
-        display: inline-block;
-        border-radius: 100px;
-  
-        background-color: #e1e1e1;
-        margin-right: 3px;
-      }
-      .active {
-        background-color: #268fd6 !important;
-      }
-    }
-    ul {
+      padding-top: 10px;
       display: inline-block;
-    }
+      li {
+          display: inline-block;
+          width: 7px;
+          height: 24px;
+          margin-right: 3px;
+          background-color: #e1e1e1;
+          border-radius: 100px;
+      }
+      @for $i from 1 through 10 {
+          &.active-li-#{$i}{
+              li:nth-child(-n+#{$i}) { @include webkitA(background, linear-gradient(#17a8fa, #108dd9)); }
+          }
+      }
+  }
+
   }
   .distance {
     margin: 0 3px;

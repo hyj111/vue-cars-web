@@ -3,17 +3,17 @@
     <Login />
     <!-- 地图 -->
     <amap @callbackComponent="callbackComponent" ref="map" />
-    <!-- car data渲染 -->
+
     <!-- 导航 -->
     <nav-bar />
-    <!-- <cars /> -->
+    <!-- car data渲染 -->
+    <cars ref="cars" />
     <transition name="fade">
       <div id="children-view" v-show="isShow">
         <!-- 会员 -->
         <router-view />
       </div>
     </transition>
-    
   </div>
 </template>
 
@@ -32,9 +32,7 @@ export default {
     Login,
   },
   data() {
-    return {
-    
-    };
+    return {};
   },
   mounted() {
     // 点击空白处关闭会员页面
@@ -63,30 +61,40 @@ export default {
     // 获取停车场信息
     getParking() {
       Parking().then((res) => {
-        const data = res.data.data
-        data.forEach(item=>{
-          item.position = item.lnglat.split(',')
-          item.content = "<img src='"+require('@/assets/images/parking_location_img.png')+"'/>"
-          item.offset = [-35,-60]
-          item.offsetText=[-35,-55]
-          item.text = `<div style="width:70px; height:60px;line-height:55px; font-size:20px; color:#fff; text-align:center;">${item.carsNumber}</div>`
+        const data = res.data.data;
+        data.forEach((item) => {
+          item.position = item.lnglat.split(",");
+          item.content =
+            "<img src='" +
+            require("@/assets/images/parking_location_img.png") +
+            "'/>";
+          item.offset = [-35, -60];
+          item.offsetText = [-35, -55];
+          item.text = `<div style="width:70px; height:60px;line-height:55px; font-size:20px; color:#fff; text-align:center;">${item.carsNumber}</div>`;
           item.events = {
-            click:(e)=>{this.walking(e)}
-          }
-        })
-        // 调地图方法   
-        this.$refs.map.parkingData(data)
+            click: (e) => {
+              this.walking(e); //路线规划
+              this.getCarsList(e); //车辆列表
+            },
+          };
+        });
+        // 调地图方法
+        this.$refs.map.parkingData(data);
       });
     },
-    walking(e){    
+    walking(e) {
       const data = e.target.getExtData();
       this.$refs.map.saveData({
-        key:"parkingDatas",
-        value:data
-      })
-      this.$refs.map.handlerWalk(data)
-      
-    }
+        key: "parkingDatas",
+        value: data,
+      });
+      this.$refs.map.handlerWalk(data);
+    },
+    getCarsList(e) {
+      const data = e.target.getExtData();
+      // 父组件调子组件的方法 
+        this.$refs.cars&&this.$refs.cars.getCarsList(data);
+    },
   },
 };
 </script>
