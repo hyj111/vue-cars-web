@@ -6,7 +6,9 @@
           <img :src="data.imgUrl" :alt="data.carsMode" />
           <span class="name">{{data.carsNumber}}</span>
         </h4>
-        <p class="cars-attr">新能源汽车 5座</p>
+        <p class="cars-attr">
+          {{data.carsAttr | energyType}} {{data.carsAttr | seatNumber}}座
+          </p>
       </header>
       <div class="cars-content">
         <div class="info">
@@ -26,7 +28,7 @@
             </ul>
             <p class="distance">
               <sub>约</sub>
-              <strong>600</strong>
+              <strong>{{data.countKm}}</strong>
               <sub>KM</sub>
             </p>
           </div>
@@ -89,6 +91,7 @@
 </template>
 
 <script>
+import {formatCarsAttr,getCarsAttrKey} from "@/utils/format.js"
 export default {
   name: "CarsList",
   filters:{
@@ -96,6 +99,28 @@ export default {
       const number = Math.round(val/10)
       return `active-li-${number}`
       
+    },
+    // 过滤能源
+    energyType(val){
+      const valJson = formatCarsAttr(val)
+      if(!valJson) {return "";}
+      return getCarsAttrKey({
+        parentKey:"basics",
+        childKey:"energy_type",
+        data:valJson
+      })
+      
+      
+    },
+    // 过滤座位数
+    seatNumber(val) {
+       if(!val){return ""}
+      const valJson = JSON.parse(val)
+       return getCarsAttrKey({
+        parentKey:"carsBody",
+        childKey:"seat_number",
+        data:valJson
+      })
     }
   },
   data() {

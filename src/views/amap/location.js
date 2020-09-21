@@ -12,14 +12,18 @@ export function SelfLocation(params) {
 
         });
     }
+   
     params.map.addControl(geolocation);
     geolocation.getCurrentPosition();
     if (params.complete && typeof params.complete == 'function') {
 
         AMap.event.addListener(geolocation, 'complete', params.complete); //定位成功
+        
     }
     if (params.error && typeof params.complete == 'function') {
         AMap.event.addListener(geolocation, 'error', params.error); //定位失败
+        
+        
     }
 };
 
