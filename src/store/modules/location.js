@@ -3,7 +3,7 @@ const state = {
 }
 const mutations = {
     SELF_LOCATION(state){
-      
+        
         state.selfLocation = !state.selfLocation
     }
 }

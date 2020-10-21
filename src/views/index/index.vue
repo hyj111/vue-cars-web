@@ -34,16 +34,7 @@ export default {
   data() {
     return {};
   },
-  mounted() {
-    // 点击空白处关闭会员页面
-    document.addEventListener("mouseup", (e) => {
-      const userCon = document.querySelector("#children-view");
-      // contains()，js原生方法，用于判断DOM元素的包含关系；判断children-view是否包含点击的目标，包含的话就返回true再取反则不会执行路由跳转
-      if (userCon && !userCon.contains(e.target)) {
-        this.$router.push({ name: "Index" }).catch((err) => err);
-      }
-    });
-  },
+ 
   computed: {
     isShow() {
       // 判断会员界面是否打开
@@ -73,6 +64,7 @@ export default {
           item.text = `<div style="width:70px; height:60px;line-height:55px; font-size:20px; color:#fff; text-align:center;">${item.carsNumber}</div>`;
           item.events = {
             click: (e) => {
+              this.$store.commit("app/SET_CARS_LIST_REQUEST",true)
               this.walking(e); //路线规划
               this.getCarsList(e); //车辆列表
             },

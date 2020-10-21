@@ -7,6 +7,8 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 //高德地图的引用
 import "./plugin/aMap"
+// px转rem
+// import './assets/js/rem'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI);
