@@ -13,6 +13,10 @@ i[class^=icon] { //获取类名开头为icon的i标签
 .color-main {
     color: $color-main;
 }
+
+// opacity
+.opacity-4 {opacity: 0.4;}
+.color-white {color: white}
 //  text-align
 .text-center {text-align: center;}
 .text-left {text-align: left;}

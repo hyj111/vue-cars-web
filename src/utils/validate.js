@@ -7,3 +7,10 @@ export function validate_password(value){
     let regPassword = /^(?!\D+$)(?![^a-zA-Z]+$)\S{6,20}$/;
     return regPassword.test(value);
 }
+
+export function validate_phone(value){
+    // 两种写法效果一样
+    // let regPhone = /^1(3|4|5|7|8|9)\d{9}$/;
+    let regPhone = /^1[345789]\d{9}$/;
+    return regPhone.test(value);
+}

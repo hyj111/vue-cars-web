@@ -35,6 +35,8 @@
         z-index: 20;
         border: none;
         font-size: 12px;
+        cursor: pointer;
+        &[disabled] {opacity: .5}
 
     }
 }

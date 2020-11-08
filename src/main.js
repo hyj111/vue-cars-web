@@ -2,6 +2,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+//全局路由守卫
+import "./router/per"
 //ElementUI引用
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
